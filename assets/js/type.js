@@ -1,7 +1,7 @@
 var typed = new Typed('.animate',{
-strings:['Back End Developer'],
+strings:['Cyber Security Enthusiast'],
     backSpeed: 40,
-    typeSpeed: 80,
+    typeSpeed: 90,
     loop:true
   });
 
