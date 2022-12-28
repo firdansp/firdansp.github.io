@@ -239,6 +239,7 @@ img{
 }
 .about__subtitle{
   margin-bottom: var(--mb-2);
+  text-align: justify;
 }
 .about__img{
   justify-self: center;
