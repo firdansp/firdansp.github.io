@@ -10,7 +10,7 @@
 #scene:fullscreen{display:block}#scene:-webkit-full-screen{display:block}
 .chrome{height:76px;background:#292d36;color:#dce1e7;user-select:none;font:12px Arial}
 .tabs{height:36px;display:flex;align-items:end;padding-left:12px;gap:4px}
-.tab{background:#41454d;padding:9px 20px;border-radius:10px 10px 0 0}.tab.muted{background:#292d36}
+.tab{background:#41454d;padding:9px 20px;border-radius:10px 10px 0 0;display:flex;align-items:center;gap:7px}.tab.muted{background:#292d36}.favicon{width:15px;height:15px;border-radius:50%;background:conic-gradient(#4285f4 0 90deg,#34a853 90deg 180deg,#fbbc05 180deg 270deg,#ea4335 270deg);color:#fff;display:inline-grid;place-items:center;font:bold 11px Arial}
 .bar{height:40px;background:#41454d;display:flex;align-items:center;gap:15px;padding:0 16px}
 .address{background:#282c34;border-radius:20px;color:#dce1e7;flex:1;padding:7px 14px}
 .page{height:calc(100vh - 76px);display:grid;place-items:center;background:#f8fafd}
@@ -21,7 +21,7 @@ h1{font-size:18px;font-weight:400;margin:0 0 30px}.input{display:block;width:100
 .badge{position:fixed;left:12px;bottom:12px;background:#fff;color:#444;padding:7px 10px;border:1px solid #ddd;border-radius:6px;font-size:12px}
 </style>
 <div id="launch"><button id="start">Login to your Google Account!</button></div>
-<div id="scene"><div class="chrome"><div class="tabs"><div class="tab muted">Incognito</div><div class="tab">Google</div></div><div class="bar"><span>←</span><span>→</span><span>↻</span><div class="address">google.com</div><span>⋮</span></div></div>
+<div id="scene"><div class="chrome"><div class="tabs"><div class="tab"><span class="favicon" aria-hidden="true">G</span>Google</div></div><div class="bar"><span>←</span><span>→</span><span>↻</span><div class="address">google.com</div><span>⋮</span></div></div>
 <div class="page"><form class="login" id="demo-form" autocomplete="off"><div class="logo" aria-label="Google"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div><h1>Sign in to your Google Account</h1><input class="input" id="dummy-email" type="text" placeholder="Email or phone" aria-label="Dummy email or phone" autocomplete="off"><input class="input" id="dummy-password" type="password" placeholder="Password" aria-label="Dummy password" autocomplete="new-password"><button class="next" type="submit">Next</button><div class="warning">Warning: No real accounts here!</div></form></div>
 </div>
 <script>
