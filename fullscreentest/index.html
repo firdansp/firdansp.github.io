@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fullscreen notice test</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;font:16px system-ui,sans-serif;color:#202124;background:#f3f6fc}
+  header{padding:14px 20px;background:#fff;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  button{padding:10px 18px;border:0;border-radius:22px;background:#0b57d0;color:white;cursor:pointer;font:inherit}
+  main{min-height:calc(100vh - 66px);display:grid;place-items:center;padding:24px}
+  .card{width:min(850px,100%);background:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:32px;box-shadow:0 2px 14px #0001}
+  h1{font-weight:400;font-size:36px;margin:20px 0 12px}.mark{font-weight:bold;font-size:26px;color:#0b57d0}
+  .field{border:1px solid #777;border-radius:5px;padding:17px;color:#777;margin:24px 0 12px}
+  .fake{pointer-events:none;user-select:none}.note{font-size:13px;color:#555}
+  #status{font-size:13px} @media(max-width:650px){.card{display:block;padding:28px}}
+</style>
+<header><strong>Local fullscreen notice test</strong><span id="status">Fullscreen: off</span><button id="toggle">Enter fullscreen</button></header>
+<main><div class="card"><section><div class="mark">Demo account</div><h1>Sign in</h1><p>Visual test page · no account needed</p></section>
+<section class="fake"><div class="field">Email or phone (disabled)</div><p>Forgot email?</p><br><p class="note">This is a visual placeholder. It cannot accept or transmit credentials.</p><div style="text-align:right;color:#0b57d0">Next (disabled)</div></section></div></main>
+<script>
+  const toggle=document.querySelector('#toggle'),status=document.querySelector('#status');
+  toggle.onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+  document.addEventListener('fullscreenchange',()=>{
+    const on=!!document.fullscreenElement;
+    status.textContent='Fullscreen: '+(on?'on':'off')+' · '+new Date().toLocaleTimeString();
+    toggle.textContent=on?'Exit fullscreen':'Enter fullscreen';
+  });
+</script>
+</html>
