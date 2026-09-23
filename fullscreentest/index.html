@@ -1,29 +1,32 @@
 <!doctype html>
 <html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fullscreen notice test</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fullscreen UI test</title>
 <style>
-  *{box-sizing:border-box}body{margin:0;font:16px system-ui,sans-serif;color:#202124;background:#f3f6fc}
-  header{padding:14px 20px;background:#fff;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center;gap:12px}
-  button{padding:10px 18px;border:0;border-radius:22px;background:#0b57d0;color:white;cursor:pointer;font:inherit}
-  main{min-height:calc(100vh - 66px);display:grid;place-items:center;padding:24px}
-  .card{width:min(850px,100%);background:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:32px;box-shadow:0 2px 14px #0001}
-  h1{font-weight:400;font-size:36px;margin:20px 0 12px}.mark{font-weight:bold;font-size:26px;color:#0b57d0}
-  .field{border:1px solid #777;border-radius:5px;padding:17px;color:#777;margin:24px 0 12px}
-  .fake{pointer-events:none;user-select:none}.note{font-size:13px;color:#555}
-  #status{font-size:13px} @media(max-width:650px){.card{display:block;padding:28px}}
+*{box-sizing:border-box}body{margin:0;background:#fff;font:14px Arial,sans-serif;color:#202124}
+#launch{height:100vh;display:grid;place-items:center}button{cursor:pointer}
+#start{width:100%;border:0;background:#3478e5;color:white;padding:5px;font:12px Arial}
+#scene{display:none;background:#f8fafd;height:100vh;overflow:hidden}
+#scene:fullscreen{display:block}#scene:-webkit-full-screen{display:block}
+.chrome{height:76px;background:#292d36;color:#dce1e7;user-select:none;font:12px Arial}
+.tabs{height:36px;display:flex;align-items:end;padding-left:12px;gap:4px}
+.tab{background:#41454d;padding:9px 20px;border-radius:10px 10px 0 0}.tab.muted{background:#292d36}
+.bar{height:40px;background:#41454d;display:flex;align-items:center;gap:15px;padding:0 16px}
+.address{background:#282c34;border-radius:20px;color:#dce1e7;flex:1;padding:7px 14px}
+.page{height:calc(100vh - 76px);display:grid;place-items:center;background:#f8fafd}
+.login{background:#fff;width:330px;padding:28px 30px;border-radius:12px;box-shadow:0 2px 9px #0002;text-align:center}
+.logo{font-size:27px;font-weight:bold;letter-spacing:1px;color:#3478e5;margin-bottom:15px}
+h1{font-size:18px;font-weight:400;margin:0 0 30px}.input{border:1px solid #dadce0;text-align:left;color:#777;border-radius:4px;padding:14px;margin:12px 0;font-size:13px}
+.next{background:#3478e5;color:#fff;padding:11px;border-radius:4px;margin-top:18px}.warning{color:#b3261e;font-size:12px;margin-top:15px}
+.badge{position:fixed;left:12px;bottom:12px;background:#fff;color:#444;padding:7px 10px;border:1px solid #ddd;border-radius:6px;font-size:12px}
 </style>
-<header><strong>Local fullscreen notice test</strong><span id="status">Fullscreen: off</span><button id="toggle">Enter fullscreen</button></header>
-<main><div class="card"><section><div class="mark">Demo account</div><h1>Sign in</h1><p>Visual test page · no account needed</p></section>
-<section class="fake"><div class="field">Email or phone (disabled)</div><p>Forgot email?</p><br><p class="note">This is a visual placeholder. It cannot accept or transmit credentials.</p><div style="text-align:right;color:#0b57d0">Next (disabled)</div></section></div></main>
+<div id="launch"><button id="start">Login by your Demo Account</button></div>
+<div id="scene"><div class="chrome"><div class="tabs"><div class="tab muted">Fullscreen UI test</div><div class="tab">Demo login</div></div><div class="bar"><span>←</span><span>→</span><span>↻</span><div class="address">🔒 account.example.test</div><span>⋮</span></div></div>
+<div class="page"><div class="login"><div class="logo">Demo</div><h1>Sign in to your demo account</h1><div class="input">Email or phone (disabled)</div><div class="input">Password (disabled)</div><div class="next">Next (disabled)</div><div class="warning">Test page — do not enter credentials</div></div></div>
+<div class="badge">Test page · Press Esc to exit fullscreen</div></div>
 <script>
-  const toggle=document.querySelector('#toggle'),status=document.querySelector('#status');
-  toggle.onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
-  document.addEventListener('fullscreenchange',()=>{
-    const on=!!document.fullscreenElement;
-    status.textContent='Fullscreen: '+(on?'on':'off')+' · '+new Date().toLocaleTimeString();
-    toggle.textContent=on?'Exit fullscreen':'Enter fullscreen';
-  });
+const scene=document.querySelector('#scene');
+document.querySelector('#start').addEventListener('click',async()=>{try{await scene.requestFullscreen()}catch(e){alert('Fullscreen request failed: '+e.message)}});
+document.addEventListener('fullscreenchange',()=>{document.querySelector('#launch').style.display=document.fullscreenElement?'none':'grid'});
 </script>
 </html>
